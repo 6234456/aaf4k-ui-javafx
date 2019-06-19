@@ -2,6 +2,7 @@ package eu.qiou.aaf4k.gui
 
 import eu.qiou.aaf4k.reportings.GlobalConfiguration
 import eu.qiou.aaf4k.reportings.base.*
+import eu.qiou.aaf4k.util.i18n.Message
 import eu.qiou.aaf4k.util.io.ExcelUtil
 import eu.qiou.aaf4k.util.io.toReporting
 import eu.qiou.aaf4k.util.roundUpTo
@@ -18,7 +19,6 @@ import javafx.scene.input.MouseButton
 import javafx.scene.layout.GridPane
 import javafx.stage.Stage
 import javafx.util.StringConverter
-import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.LocalDate
@@ -56,10 +56,9 @@ class GUI : Application() {
     @Suppress("UNCHECKED_CAST")
     override fun start(primaryStage: Stage?) {
 
-        val css = "file:///" + File("src/main/resources/stylesheet/main.css")
-                .absolutePath.replace("\\", "/")
+        val css = "file:///" + this.javaClass.classLoader.getResource("stylesheet/main.css").path
 
-        val msg = ResourceBundle.getBundle("aaf4k", locale)
+        val msg = Message(locale)
         Locale.setDefault(locale)
 
         val reporting = reporting
