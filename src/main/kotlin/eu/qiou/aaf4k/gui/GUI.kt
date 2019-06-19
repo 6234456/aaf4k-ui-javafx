@@ -595,14 +595,22 @@ class GUI : Application() {
                                                                         MenuItem("Microsoft Excel").apply {
                                                                             setOnAction {
                                                                                 FileChooser().apply {
-                                                                                    selectedExtensionFilter =
+                                                                                    val f = FileChooser.ExtensionFilter(
+                                                                                        "Microsoft Excel 97",
+                                                                                        "*.xls"
+                                                                                    )
+                                                                                    extensionFilters.add(f)
+                                                                                    extensionFilters.add(
                                                                                         FileChooser.ExtensionFilter(
-                                                                                            "save file",
-                                                                                            listOf(".xls", ".xlsx")
+                                                                                            "Microsoft Excel 03",
+                                                                                            "*.xlsx"
                                                                                         )
+                                                                                    )
+                                                                                    selectedExtensionFilter = f
+
                                                                                     initialFileName = "data.xls"
                                                                                 }.showSaveDialog(primaryStage!!)
-                                                                                    .let { file ->
+                                                                                    ?.let { file ->
                                                                                         if (file.exists())
                                                                                             file.delete()
 
