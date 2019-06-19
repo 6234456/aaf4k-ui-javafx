@@ -17,6 +17,7 @@ import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.input.MouseButton
 import javafx.scene.layout.GridPane
+import javafx.stage.FileChooser
 import javafx.stage.Stage
 import javafx.util.StringConverter
 import java.nio.file.Files
@@ -591,26 +592,29 @@ class GUI : Application() {
                                                                 SeparatorMenuItem(),
                                                                 Menu("${msg.getString("exportAs")}...").apply {
                                                                     items.addAll(
-                                                                            MenuItem(".xls").apply {
-                                                                                setOnAction {
-                                                                                    Paths.get("data/demo.xls").toFile().let { file ->
+                                                                        MenuItem("Microsoft Excel").apply {
+                                                                            setOnAction {
+                                                                                FileChooser().apply {
+                                                                                    selectedExtensionFilter =
+                                                                                        FileChooser.ExtensionFilter(
+                                                                                            "save file",
+                                                                                            listOf(".xls", ".xlsx")
+                                                                                        )
+                                                                                    initialFileName = "data.xls"
+                                                                                }.showSaveDialog(primaryStage!!)
+                                                                                    .let { file ->
                                                                                         if (file.exists())
                                                                                             file.delete()
-                                                                                    }
-                                                                                    reporting.shorten().toXl("data/demo.xls", t = Template.Theme.DEFAULT, locale = locale)
-                                                                                    println("exported")
-                                                                                }
-                                                                            },
-                                                                            MenuItem(".xlsx").apply {
-                                                                                setOnAction {
-                                                                                    Paths.get("data/demo.xlsx").toFile().let { file ->
-                                                                                        if (file.exists())
-                                                                                            file.delete()
-                                                                                    }
-                                                                                    reporting.shorten().toXl("data/demo.xlsx", t = Template.Theme.DEFAULT, locale = locale)
+
+                                                                                        reporting.shorten().toXl(
+                                                                                            file.absolutePath,
+                                                                                            t = Template.Theme.DEFAULT,
+                                                                                            locale = locale
+                                                                                        )
                                                                                     println("exported")
                                                                                 }
                                                                             }
+                                                                        }
                                                                     )
                                                                 }
                                                         )
