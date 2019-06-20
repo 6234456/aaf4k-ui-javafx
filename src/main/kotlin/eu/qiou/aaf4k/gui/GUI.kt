@@ -559,7 +559,7 @@ class GUI : Application() {
                     reporting.categories.map {
                         val category = it
                         TreeTableColumn<ProtoAccount, String>(it.name).apply {
-                            val data = it.toDataMap()
+                            val data = it.toDataMap(true)
                             setCellFactory {
                                 object : TreeTableCell<ProtoAccount, String>() {
                                     override fun updateItem(item: String?, empty: Boolean) {
@@ -596,13 +596,13 @@ class GUI : Application() {
                                                                             setOnAction {
                                                                                 FileChooser().apply {
                                                                                     val f = FileChooser.ExtensionFilter(
-                                                                                        "Microsoft Excel 97",
+                                                                                        "Microsoft Excel 97 (.xls)",
                                                                                         "*.xls"
                                                                                     )
                                                                                     extensionFilters.add(f)
                                                                                     extensionFilters.add(
                                                                                         FileChooser.ExtensionFilter(
-                                                                                            "Microsoft Excel 03",
+                                                                                            "Microsoft Excel 2003 (.xlsx)",
                                                                                             "*.xlsx"
                                                                                         )
                                                                                     )
@@ -646,7 +646,7 @@ class GUI : Application() {
                     } +
                     listOf(
                             TreeTableColumn<ProtoAccount, String>(msg.getString("balanceAfterAdj")).apply {
-                                val data = reporting.toDataMap()
+                                val data = reporting.toDataMap(true)
                                 setCellValueFactory {
                                     ReadOnlyStringWrapper(
                                             formatter(data.getOrDefault(it.value.value.id, 0.0),
