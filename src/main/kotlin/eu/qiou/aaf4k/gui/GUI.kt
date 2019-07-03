@@ -50,7 +50,10 @@ class GUI : Application() {
         var srcJSONFile: String? = null
         var locale: Locale = GlobalConfiguration.DEFAULT_LOCALE
             set(value) {
-                field = if (supportedLocale.contains(value)) value else GlobalConfiguration.DEFAULT_LOCALE
+                field = if (supportedLocale.contains(value)) {
+                    GlobalConfiguration.DEFAULT_LOCALE = locale
+                    value
+                } else GlobalConfiguration.DEFAULT_LOCALE
             }
     }
 
