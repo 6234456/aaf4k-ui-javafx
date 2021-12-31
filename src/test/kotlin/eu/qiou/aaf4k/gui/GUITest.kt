@@ -8,7 +8,7 @@ class GUITest {
 
     @Test
     fun start() {
-        GUI.locale = Locale.GERMAN
+        GUI.locale = Locale.CHINESE
         GUI.open(AccountingFrame
             .inflate(
                 123L, "CAS1",

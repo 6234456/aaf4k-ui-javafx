@@ -51,7 +51,7 @@ class GUI : Application() {
         var locale: Locale = GlobalConfiguration.DEFAULT_LOCALE
             set(value) {
                 field = if (supportedLocale.contains(value)) {
-                    GlobalConfiguration.DEFAULT_LOCALE = locale
+                    //GlobalConfiguration.DEFAULT_LOCALE = locale
                     value
                 } else GlobalConfiguration.DEFAULT_LOCALE
             }
