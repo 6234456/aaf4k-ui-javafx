@@ -1,11 +1,11 @@
 package eu.qiou.aaf4k.gui
 
-import javax.script.ScriptEngineManager
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory
 
 object StringParser {
     val regBinding = """^=([\$\(\)\.\+\-\*/\d]*)\s*$""".toRegex()
     val regBindingElement = """\$(\d+)""".toRegex()
-    private val js = ScriptEngineManager().getEngineByName("js")
+    private val js = NashornScriptEngineFactory().scriptEngine
 
     // bindingString starts with $()
     // $1 position of the target element in the srcList

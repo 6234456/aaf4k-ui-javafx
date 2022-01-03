@@ -2,6 +2,7 @@ package eu.qiou.aaf4k.gui
 
 import eu.qiou.aaf4k.reportings.base.AccountingFrame
 import org.junit.Test
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory
 import java.util.*
 
 class GUITest {
@@ -18,5 +19,11 @@ class GUITest {
                 prepareConsolidation()
             }
         )
+    }
+
+    @Test
+    fun numericField(){
+        val js = NashornScriptEngineFactory().scriptEngine
+        println(js.eval("123/4"))
     }
 }

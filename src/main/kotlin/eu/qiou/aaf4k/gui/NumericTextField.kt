@@ -7,9 +7,9 @@ import eu.qiou.aaf4k.util.strings.times
 import javafx.application.Platform
 import javafx.geometry.Pos
 import javafx.scene.control.TextField
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import javax.script.ScriptEngineManager
 
 // bindingContext specifies a range of components to be chosen from
 class NumericTextField(val decimalPrecision: Int, text: String? = "", var bindingContext: List<NumericTextField>? = null) : TextField(text) {
@@ -20,7 +20,7 @@ class NumericTextField(val decimalPrecision: Int, text: String? = "", var bindin
         private val regFormula = """^=([\$\(\)\$decimalSep\+\-\*/\d]*)\s*$""".toRegex()
         private val regNormal = """\-?\d*\$decimalSep?\d*""".toRegex()
 
-        private val js = ScriptEngineManager().getEngineByName("js")
+        private val js = NashornScriptEngineFactory().scriptEngine
         private val formatter: (Number, Int) -> String = { n, dec ->
             if (Math.abs(n.toDouble()) < Math.pow(10.0, -1.0 * (dec + 1))) "0" else String.format("%,.${dec}f", n.roundUpTo(dec))
         }

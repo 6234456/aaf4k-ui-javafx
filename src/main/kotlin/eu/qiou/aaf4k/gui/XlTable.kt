@@ -58,6 +58,7 @@ class XlTable(xlSht: Sheet, hasHeading: Boolean = true) : TableView<Map<String, 
                                         HorizontalAlignment.RIGHT -> this.alignment = Pos.CENTER_RIGHT
                                         HorizontalAlignment.LEFT -> this.alignment = Pos.CENTER_LEFT
                                         HorizontalAlignment.CENTER -> this.alignment = Pos.CENTER
+                                        else -> {}
                                     }
 
 

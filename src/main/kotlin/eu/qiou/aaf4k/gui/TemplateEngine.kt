@@ -1,7 +1,7 @@
 package eu.qiou.aaf4k.gui
 
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory
 import java.util.*
-import javax.script.ScriptEngineManager
 
 // to fill in the tmpl reporting
 /**
@@ -15,7 +15,7 @@ import javax.script.ScriptEngineManager
 class TemplateEngine(val prefix: String = "[", val affix: String = "]", val fmt: String = "%,.2f") {
     private val regEvaluate = """\$prefix=([^|]+)(?:\s*\|\s*(%[\d\w.,]+))?\s*\$affix""".toRegex()
     private val regElement = """\$prefix([^\$prefix\$affix\|]+)(?:\s*\|\s*(%[\d\w.,]+))?\s*\$affix""".toRegex()
-    private val js = ScriptEngineManager().getEngineByName("js")
+    private val js = NashornScriptEngineFactory().scriptEngine
 
     private fun parse(tpl: String, data: Map<String, Any>, withBrackets: Boolean = false): String {
         var fmt = fmt
